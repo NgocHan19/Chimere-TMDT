@@ -4,9 +4,10 @@ namespace TMDT.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Login()
         {
-            return View();
+            return View("~/Views/Account/Login.cshtml");
         }
     }
 }
