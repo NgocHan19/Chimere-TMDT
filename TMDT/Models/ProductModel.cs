@@ -24,6 +24,7 @@ namespace TMDT.Models
         public int Sold { get; set; }
         public CategoryModel Category { get; set; }
 		public BrandModel Brand { get; set; }
+		public string Image { get; set; }
 		//public RatingModel Ratings { get; set; }
-    }
+	}
 }
