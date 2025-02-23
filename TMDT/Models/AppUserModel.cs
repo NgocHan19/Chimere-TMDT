@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace E_commerce.Models
+namespace TMDT.Models
 {
     public class AppUserModel : IdentityUser
     {

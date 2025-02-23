@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace E_commerce.Models
+namespace TMDT.Models
 {
 	public class ProductModel
     {

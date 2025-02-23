@@ -1,4 +1,4 @@
-﻿using E_commerce.Models;
+﻿using TMDT.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace TMDT.Repository
