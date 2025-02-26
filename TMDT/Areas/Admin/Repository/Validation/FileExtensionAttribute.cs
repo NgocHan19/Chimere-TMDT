@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TMDT.Repository.Validation
+namespace TMDT.Areas.Admin.Repository.Validation
 {
     public class FileExtensionAttribute : ValidationAttribute
     {

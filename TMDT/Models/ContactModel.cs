@@ -1,5 +1,4 @@
-﻿using TMDT.Repository.Validation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TMDT.Models
@@ -7,7 +6,6 @@ namespace TMDT.Models
 	public class ContactModel
 	{
 		[Key]
-
 		[Required(ErrorMessage = "Website Name is required")]
 		public string Name { get; set; }
 		[Required(ErrorMessage = "Contact info is required")]
@@ -21,7 +19,7 @@ namespace TMDT.Models
 		public string LogoImg { get; set; }
 
 		[NotMapped]
-		[FileExtension]
+		[FileExtensions]
 		public IFormFile? ImageUpload { get; set; }
 	}
 }

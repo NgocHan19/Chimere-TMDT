@@ -16,7 +16,8 @@ namespace TMDT.Repository
 		public DbSet<RatingModel> Ratings { get; set; }
 		public DbSet<ContactModel> Contacts { get; set; }
 		public DbSet<ProductQuantityModel> ProductQuantities { get; set; }
+		public DbSet<WishlistModel> Wishlists { get; set; }
 
-		public DbSet<TMDT.Models.UserModel> UserModel { get; set; }
+		public DbSet<TMDT.Models.UserModel> Users { get; set; }
 	}
 }
