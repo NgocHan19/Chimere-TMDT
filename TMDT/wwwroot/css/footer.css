@@ -1,0 +1,224 @@
+﻿footer {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: #778B7F;
+}
+
+.footer-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.footer-sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-section {
+    position: absolute;
+    color: #FFFFFF;
+}
+
+h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+ul {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 25px;
+    color: #FFFFFF;
+}
+
+.footer-section ul {
+    list-style-type: none;
+}
+
+#online-shopping {
+    position: absolute;
+    top: 20px;
+    left: 70px;
+}
+
+#useful-lines {
+    position: absolute;
+    top: 180px;
+    left: 70px;
+}
+
+#customer-policies {
+    position: absolute;
+    top: 20px;
+    left: 350px;
+}
+
+#popular-searches {
+    position: absolute;
+    top: 360px;
+    left: 70px;
+}
+
+    #popular-searches ul {
+        padding: 0;
+        margin: 0;
+        display: flex; /* Xếp hàng ngang */
+        gap: 5px;
+    }
+
+    #popular-searches li {
+        display: inline; /* Hiển thị trên cùng một dòng */
+    }
+
+        #popular-searches li:not(:last-child)::after {
+            content: " | "; /* Thêm dấu | sau mỗi mục trừ mục cuối */
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+.footer-line {
+    position: absolute;
+    width: 1350px;
+    height: 0;
+    left: 70px;
+    top: 430px;
+    border: 1px solid #FFFFFF;
+}
+
+.footer-bottom {
+    position: absolute;
+    width: 100%;
+    bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.footer-bottom-left {
+    position: relative;
+    left: 70px;
+}
+
+.footer-bottom-right {
+    position: relative;
+    right: 90px;
+}
+
+.footer-connect {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.footer-app {
+    text-align: left;
+}
+
+.app-store {
+    display: flex;
+    gap: 5px; 
+    justify-content: flex-start; 
+    margin-top: 10px;
+}
+
+.app-item {
+    width: 140px;
+    height: 40px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+}
+
+    .app-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+.keep-in-touch {
+    text-align: left;
+    margin-top: 10px;
+}
+
+    .keep-in-touch .social-icons {
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+        .keep-in-touch .social-icons img {
+            width: 20px;
+            height: auto;
+            cursor: pointer;
+        }
+
+.footer-subscribe {
+    position: absolute;
+    top: 20px;
+    right: 150px;
+    width: 281px;
+    height: 150px;
+}
+
+    .footer-subscribe h3 {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 16px;
+        margin: 0 0 5px 0;
+    }
+
+    .footer-subscribe p {
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 25px;
+        color: #FFFFFF;
+    }
+
+.subscribe-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .subscribe-input input {
+        width: 100%;
+        height: 40px;
+        background: #778B7F;
+        border: 1px solid #FFFFFF;
+        border-radius: 2px;
+        color: #FFFFFF;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .subscribe-input button {
+        width: 100%;
+        height: 40px;
+        background: #923B10;
+        border-radius: 2px;
+        color: #FFFFFF;
+        font-size: 13px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase; /* Đảm bảo chữ luôn viết hoa */
+    }

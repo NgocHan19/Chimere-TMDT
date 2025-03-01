@@ -1,4 +1,4 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,8 +19,15 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Cấu hình route cho Admin (nếu có)
+app.MapControllerRoute(
+    name: "admin",
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}",
+    defaults: new { area = "Admin" });
+
+// Route mặc định cho trang chủ
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Login}/{id?}");
+    pattern: "{controller=Wishlist}/{action=WishlistEmpty}/{id?}");
 
 app.Run();

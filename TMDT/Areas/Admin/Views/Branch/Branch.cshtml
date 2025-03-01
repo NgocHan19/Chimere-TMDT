@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Manage Branchs";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Branchs</title>
+    <link rel="stylesheet" href="~/css/branch.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="button-container">
+                <button class="btn neutral">Product List</button>
+                <button class="btn neutral">Manage Branchs</button>
+                <button class="btn neutral">Manage Categories</button>
+            </div>
+
+            <div class="branch-container">
+                <div class="search-container">
+                    <div class="from-container">
+                        <span class="search-by">Search Branchs</span>
+                        <div class="date-time">
+                            <input type="text" class="text" placeholder="Search anythings">
+                            <img src="search-icon.svg" alt="Search Icon" class="search-icon">
+                        </div>
+                    </div>
+
+                    <button class="search-button">
+                        <img src="search-icon-white.svg" alt="Search">
+                    </button>
+                </div>
+
+                <button class="btn-add">+ Add Branch</button>
+            </div>
+
+            <div class="table-container">
+                <!-- Header -->
+                <div class="table-header">
+                    <div class="entries-selector">
+                        <span>Show up to</span>
+                        <select>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                        </select>
+                        <span>entries</span>
+                    </div>
+                    <button class="export-btn">
+                        <span>Export</span>
+                    </button>
+                </div>
+                <!-- Bảng -->
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>SI</th>
+                            <th>Branchs Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Chi Nhánh Hà Nội</td>
+                            <td>
+                                <button class="action-btn">Xóa</button>
+                                <button class="action-btn">Xem chi tiết</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Chi Nhánh TP.HCM</td>
+                            <td><button class="action-btn">Xóa</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Chi Nhánh Đà Nẵng</td>
+                            <td><button class="action-btn">Xóa</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

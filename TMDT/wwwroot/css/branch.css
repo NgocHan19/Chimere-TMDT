@@ -1,0 +1,233 @@
+﻿body {
+    font-family: 'Manrope', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
+    left: 100px;
+    top: 30px;
+}
+
+.button-container {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 20px;
+    height: 36px;
+    border: 1px solid #F3F3F7;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Màu mặc định */
+.neutral {
+    background: rgba(223, 223, 223, 0.5);
+}
+
+/* Khi nhấn vào */
+.btn:focus,
+.btn:active {
+    background: #5065F6;
+    color: white;
+    outline: none;
+}
+
+.branch-container {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+    gap: 10px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 10px;
+}
+    .search-container input {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        border: none;
+        outline: none;
+    }
+
+/*.search-container .from-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}*/
+
+.date-time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    width: 263px;
+    height: 30px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.06);
+    border-radius: 8px;
+    flex-grow: 1;
+}
+
+.search-button {
+    background-color: #4CAF50;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    width: 38px;
+}
+
+    .search-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+.btn-add {
+    background: #5065F6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+    .btn-add:hover {
+        background: #4050c5;
+    }
+
+.from-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.search-by,
+.position {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #757B82;
+}
+
+.date-time-value {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9EA3A7;
+}
+
+.search-icon,
+.chevron-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.table-container {
+    width: 1200px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.02);
+    border-radius: 10px;
+    padding: 14px 20px 40px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.entries-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .entries-selector select {
+        padding: 7px 8px;
+        border: 1px solid rgba(200, 202, 205, 0.5);
+        border-radius: 7px;
+        background: #FFFFFF;
+        font-size: 14px;
+        color: #262626;
+    }
+
+.export-btn {
+    background: #F5F5F5;
+    border: 1px solid #F3F3F7;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .custom-table thead {
+        background: #FFFFFF;
+        box-shadow: inset 0px -1px 0px rgba(239, 239, 239, 0.5);
+    }
+
+    .custom-table th, .custom-table td {
+        padding: 12px 20px;
+        text-align: left;
+        font-size: 16px;
+        color: #757B82;
+        border-bottom: 1px solid #EFEFEF;
+    }
+
+    .custom-table th {
+        font-weight: 600;
+    }
+
+    .custom-table tbody tr:hover {
+        background: #f8f9fa;
+    }
+
+.action-btn {
+    background: #FF4D4D;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .action-btn:hover {
+        background: #e04343;
+    }
