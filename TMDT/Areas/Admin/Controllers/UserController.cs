@@ -25,8 +25,9 @@ namespace TMDT.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int pg = 1)
         {
             // Step 1: Retrieve users and their roles
-            var usersWithRoles = await (from u in _dataContext.Users
-                                        join ur in _dataContext.UserRoles on u.Id.ToString() equals ur.UserId
+            var usersWithRoles = await (from u in _dataContext.AppUsers
+                                        join ur in _dataContext.UserRoles on u.Id equals ur.UserId
+
                                         join r in _dataContext.Roles on ur.RoleId equals r.Id
                                         select new { User = u, RoleName = r.Name }).ToListAsync();
 
