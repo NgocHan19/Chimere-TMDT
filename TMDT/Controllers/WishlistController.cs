@@ -4,9 +4,14 @@ namespace TMDT.Controllers
 {
     public class WishlistController : Controller
     {
-        public IActionResult WishlistEmpty()
+        public IActionResult Wishlist()
         {
-            return View("~/Views/Wishlist/Wishlist-Empty.cshtml");
+            return View("~/Views/Wishlist/Wishlist.cshtml");
         }
+
+        //public IActionResult Empty()
+        //{
+        //    return View("~/Views/Wishlist/Wishlist-Empty.cshtml");
+        //}
     }
 }
