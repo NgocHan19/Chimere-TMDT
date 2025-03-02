@@ -25,13 +25,13 @@ namespace TMDT.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int pg = 1)
         {
             // Step 1: Retrieve users and their roles
-            var usersWithRoles = await (from u in _dataContext.Users
+            var usersWithRoles = await (from u in _dataContext.AppUsers
                                         join ur in _dataContext.UserRoles on u.Id equals ur.UserId
                                         join r in _dataContext.Roles on ur.RoleId equals r.Id
                                         select new { User = u, RoleName = r.Name }).ToListAsync();
 
             // Step 2: Retrieve categories and paginate them
-            List<AppUserModel> user = _dataContext.Users.ToList(); // Assume 33 datas
+            List<AppUserModel> user = _dataContext.AppUsers.ToList(); // Assume 33 datas
 
             const int pageSize = 10; // Items per page
             if (pg < 1)

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title > Home</title>
+    <link rel="stylesheet" href="~/css/home.css">
+</head>
+<body>
+    <div class="container">
+    <div class="banner"> </div>
+    <div class="categories">
+    <div class="category">
+    <div class="circle">
+    <img src="image.png" alt="Unisex Perfume">
+</div >
+    <p> Unisex Perfume</p>
+</div >
+<div class="category">
+    <div class="circle">
+    <img src="image.png" alt="Mini Perfume">
+</div>
+    <p> Mini Perfume</p>
+</div>
+    <div class="category">
+    <div class="circle">
+    <img src="image.png" alt="Niche Perfume">
+</div>
+    <p> Niche Perfume</p>
+</div>
+    <div class="category">
+    <div class="circle">
+    <img src="image.png" alt="Designer Perfume">
+</div>
+    <p> Designer Perfume</p>
+</div>
+    <div class="category">
+    <div class="circle">
+    <img src="image.png" alt="Natural Perfume">
+</div>
+    <p> Natural Perfume</p>
+</div>
+</div>
+</div>
+</body>
+</html>
