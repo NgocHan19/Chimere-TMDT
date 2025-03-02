@@ -75,7 +75,9 @@ app.UseAuthorization();
 app.UseAuthentication();
 
 app.MapControllerRoute(
+
 	name: "default",
 	pattern: "{controller=Detail}/{action=Detail}/{id?}");
+
 
 app.Run();
