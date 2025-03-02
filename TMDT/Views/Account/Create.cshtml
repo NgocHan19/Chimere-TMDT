@@ -2,37 +2,42 @@
 @{
     ViewData["Title"] = "Register User";
 }
-	<section id=""><!--form-->
-		<div class="container">
-		<div class="col-sm-8 col-sm-offset-1">
-			<div class="signup-form">
-				<!--sign up form-->
-				<h2>New User Signup!</h2>
-				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-				<form asp-action="Create" asp-controller="Account">
-					<div class="form-group">
-						<label>Username</label>
-						<input asp-for="UserName" class="form-control" />
-						<span asp-validation-for="UserName" class="text-danger" />
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input asp-for="Email" class="form-control" />
-						<span asp-validation-for="Email" class="text-danger" />
-					</div>
-					<div class="form-group">
-						<label>Password</label>
-						<input asp-for="Password" class="form-control" />
-						<span asp-validation-for="Password" class="text-danger" />
-					</div>
-					<button type="submit" class="btn btn-default">Create</button>
-				</form>
-			</div><!--/sign up form-->
-		</div>
-		</div>
-	</section><!--/form-->
+@using TMDT.Models.ViewModel
+
+<link rel="stylesheet" href="~/css/register.css">
+
+<div id="login-modal" class="modal-overlay">
+    <section class="login-container">
+        <div class="login-box">
+            <img src="/images/close.png" id="close-btn" class="close-btn" alt="Close">
+            <h2>Sign Up</h2>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Login" asp-controller="Account" class="login-form">
+                <div class="form-group">
+                    <input asp-for="UserName" class="form-control" placeholder="Enter Email*" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group password-group">
+                    <input asp-for="Password" class="form-control" placeholder="Enter Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <p class="terms">By Continuing, I agree to the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></p>
+                <button type="submit" class="btn btn-login">Continue</button>
+            </form>
+            <p class="signup">Already have an account? <a asp-action="Login" asp-controller="Account">Log in here</a></p>
+            <p class="help">Having trouble signing up? <a href="#">Get help</a></p>
+        </div>
+    </section>
+</div>
+
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            document.getElementById("close-btn").addEventListener("click", function () {
+                document.getElementById("login-modal").style.display = "none";
+            });
+        </script>
 	}
 }
