@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Employee List";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <link rel="stylesheet" href="~/css/employee.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="employee-container">
+            <div class="title-container">
+                <h1 class="employee-title">Employee List</h1>
+                <button class="btn-add">+ Add New Employee</button>
+            </div>
+
+            <div class="search-container">
+                <div class="from-container">
+                    <span class="search-by">Search By</span>
+                    <div class="date-time">
+                        <input type="text" class="text" placeholder="Search by anything">
+                        <img src="search-icon.svg" alt="Search Icon" class="search-icon">
+                    </div>
+                </div>
+
+                <div class="to-container">
+                    <span class="position">Position</span>
+                    <div class="date-time">
+                        <span class="date-time-value">Position</span>
+                        <img src="chevron-icon.svg" alt="Chevron Icon" class="chevron-icon">
+                    </div>
+                </div>
+
+                <button class="search-button">
+                    <img src="search-icon-white.svg" alt="Search">
+                </button>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card">
+                <div class="card-header">
+                    <div class="avatar">
+                        <img src="6.png" alt="Avatar">
+                    </div>
+                    <div class="user-info">
+                        <h2 class="user-name">Darlene Robertson</h2>
+                        <div class="designation">Service Provider</div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="info-row">
+                        <span class="label">Phone:</span>
+                        <span class="value">(406) 555-0120</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Blood Group:</span>
+                        <span class="value">A+ (Positive)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <span class="value">jane@gmail.com</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Hourly Rate:</span>
+                        <span class="value">$3456.00</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Thêm các card khác -->
+        </div>
+    </div>
+</body>
+</html>

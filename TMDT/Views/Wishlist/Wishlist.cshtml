@@ -1,0 +1,74 @@
+﻿@* @model List<TMDT.Models.ProductModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Wishlist";
+} *@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="~/css/wishlist.css" />
+</head>
+<body>
+    <div class="wishlist-container">
+        <h1>WISHLIST</h1>
+        <p>Sign in or create an account to access your wishlist from anywhere.</p>
+
+        <div class="product-list">
+            <div class="product">
+                <button class="heart-btn">
+                    <img src="/images/heart.png" alt="Favorite">
+                </button>
+                <img src="/images/pr1.png" alt="Chanel Coco Mademoiselle">
+                <p class="product-name">Nước hoa Chanel Coco Mademoiselle EDP Intense</p>
+                <p class="price">1000$ US</p>
+                <button class="add-to-bag">ADD TO BAG</button>
+            </div>
+
+            <div class="product">
+                <button class="heart-btn">
+                    <img src="/images/heart.png" alt="Favorite">
+                </button>
+                <img src="/images/pr1.png" alt="Chanel Bleu De Chanel">
+                <p class="product-name">Nước hoa Chanel Bleu De Chanel Parfum</p>
+                <p class="price">1000$ US</p>
+                <button class="add-to-bag">ADD TO BAG</button>
+            </div>
+
+            <div class="product">
+                <button class="heart-btn">
+                    <img src="/images/heart.png" alt="Favorite">
+                </button>
+                <img src="/images/pr1.png" alt="Chanel Gabrielle">
+                <p class="product-name">Nước hoa Chanel Gabrielle Essence Eau de Parfum</p>
+                <p class="price">1000$ US</p>
+                <button class="add-to-bag">ADD TO BAG</button>
+            </div>
+
+            <div class="product">
+                <button class="heart-btn">
+                    <img src="/images/heart.png" alt="Favorite">
+                </button>
+                <img src="/images/pr1.png" alt="Chanel No 5">
+                <p class="product-name">Nước hoa Chanel No 5 L'Eau Eau de Toilette</p>
+                <p class="price">1000$ US</p>
+                <button class="add-to-bag">ADD TO BAG</button>
+            </div>
+
+            <div class="product">
+                <button class="heart-btn">
+                    <img src="/images/heart.png" alt="Favorite">
+                </button>
+                <img src="/images/pr1.png" alt="Thêm sản phẩm khác">
+                <p class="product-name">Sản phẩm khác</p>
+                <p class="price">1000$ US</p>
+                <button class="add-to-bag">ADD TO BAG</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

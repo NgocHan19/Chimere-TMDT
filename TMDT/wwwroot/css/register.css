@@ -65,7 +65,7 @@ body {
 }
 
 .li-ne {
-    width:20px;
+    width: 20px;
     flex-grow: 1;
     height: 1px;
     background-color: #ADABAB;
@@ -95,9 +95,9 @@ body {
     margin-bottom: 15px;
 }
 
-.google-icon{
+.google-icon {
     width: 30px;
-    height:auto;
+    height: auto;
     margin-right: 8px;
 }
 
@@ -107,14 +107,14 @@ body {
 
 .login-form input.form-control {
     padding: 12px;
-    font-size: 13px; 
+    font-size: 13px;
     border: 2px solid #ccc;
     border-radius: 5px;
     width: 100%;
 }
 
 .text-danger {
-    font-size: 15px; 
+    font-size: 15px;
     font-weight: normal;
 }
 
