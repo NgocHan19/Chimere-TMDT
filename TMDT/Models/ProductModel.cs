@@ -19,12 +19,23 @@ namespace TMDT.Models
 		[Required, Range(1, int.MaxValue, ErrorMessage = "Choose one Brand")]
 		public int BrandId { get; set; }
         [Required, Range(1, int.MaxValue, ErrorMessage = "Choose one Category")]
-        public int CategoryId { get; set; }
         public int Quantity { get; set; }
         public int Sold { get; set; }
-        public CategoryModel Category { get; set; }
 		public BrandModel Brand { get; set; }
 		public string Image { get; set; }
-		public RatingModel Ratings { get; set; }
-	}
+        public string? Component { get; set; }
+        public string? Inspiration { get; set; }
+        [Required, Range(1, int.MaxValue, ErrorMessage = "Capacity must be greater than 0")]
+        public int Capacity { get; set; }
+        public RatingModel Ratings { get; set; }
+
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public CategoryModel Category { get; set; }
+
+        // Mối quan hệ với SubCategory (Danh mục con)
+        public int? SubCategoryId { get; set; }  // Có thể là null nếu không có danh mục con
+        [ForeignKey("SubCategoryId")]
+        public CategoryModel SubCategory { get; set; } // Danh mục con
+    }
 }

@@ -1,0 +1,173 @@
+﻿@using TMDT.Models.ViewModel
+@* @model LoginViewModel *@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<link rel="stylesheet" href="~/css/home.css">
+<script src="~/js/site.js" defer></script>
+    <!-- Thêm Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Thêm Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<div class="content">
+        <div class="banner">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="~/images/slide.png" alt="Slide 1"></div>
+                    <div class="swiper-slide"><img src="~/images/slide.png" alt="Slide 2"></div>
+                    <div class="swiper-slide"><img src="~/images/slide.png" alt="Slide 3"></div>
+                </div>
+                <!-- Nút điều hướng -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Chỉ mục -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        <div class="categories-highlight">
+            <div class="category-highlight">
+                <div class="circle">
+                    <img src="~/images/pr1.png" alt="Unisex Perfume">
+                </div>
+                <p>Unisex Perfume</p>
+            </div>
+            <div class="category-highlight">
+                <div class="circle">
+                <img src="~/images/pr3.png" alt="Mini Perfume">
+                </div>
+                <p>Mini Perfume</p>
+            </div>
+            <div class="category-highlight">
+                <div class="circle">
+                <img src="~/images/pr2.png" alt="Niche Perfume">
+                </div>
+                <p>Niche Perfume</p>
+            </div>
+            <div class="category-highlight">
+                <div class="circle">
+                <img src="~/images/pr3.png" alt="Designer Perfume">
+                </div>
+                <p>Designer Perfume</p>
+            </div>
+            <div class="category-highlight">
+                <div class="circle">
+                <img src="~/images/pr4.png"alt="Natural Perfume">
+                </div>
+                <p>Natural Perfume</p>
+            </div>
+        </div>
+
+    <div class="content-1">
+        <div class="highlight-section">
+            <div class="highlight-title">
+                <span>HIGHLIGHT</span> <br>
+                <h2 class="featured-products">FEATURED PRODUCTS</h2>
+            </div>
+            <button class="see-all">See all</button>
+        </div>
+
+        <div class="product-highlight">
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Coco Mademoiselle">
+                <div class="product-name">Nước hoa Chanel Coco Mademoiselle EDP Intense</div>
+                <div class="product-price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Bleu De Chanel">
+                <div class="product-name">Nước hoa Chanel Bleu De Chanel Parfum</div>
+                <div class="product-price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Gabrielle Essence">
+                <div class="product-name">Nước hoa Chanel Gabrielle Essence Eau de Parfum</div>
+                <div class="product-price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel No 5 L'Eau">
+                <div class="product-name">Nước hoa Chanel No 5 L'Eau Eau de Toilette</div>
+                <div class="product-price">1000$ US</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rectangle">
+        <img src="~/images/intro.png" class="image-97" alt="Intro">
+    </div>
+
+    <div class="content-3">
+        <div class="image-wrapper">
+            <img src="~/images/poster.png" alt="Mô tả hình ảnh">
+        </div>
+        <div class="text-wrapper">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                and scrambled it to make a type specimen book. It has survived not only five centuries, but also
+                the leap into electronic typesetting, remaining essentially unchanged.
+            </p>
+        </div>
+    </div>
+
+    <div class="content-2">
+        <div class="highlight-section">
+            <div class="highlight-title">
+                <span>HIGHLIGHT</span> <br>
+                <h2 class="featured-products">FEATURED PRODUCTS</h2>
+            </div>
+            <button class="see-all-1">See all</button>
+        </div>
+        <div class="section">
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Coco Mademoiselle">
+                <div class="product-title">Nước hoa Chanel Coco Mademoiselle EDP Intense</div>
+                <div class="price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Bleu De Chanel">
+                <div class="product-title">Nước hoa Chanel Bleu De Chanel Parfum</div>
+                <div class="price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Gabrielle Essence">
+                <div class="product-title">Nước hoa Chanel Gabrielle Essence Eau de Parfum</div>
+                <div class="price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel No 5 L'Eau">
+                <div class="product-title">Nước hoa Chanel No 5 L'Eau Eau de Toilette</div>
+                <div class="price">1000$ US</div>
+            </div>
+            <div class="product">
+                <img src="~/images/pr4.png" alt="Chanel Allure">
+                <div class="product-title">Nước hoa Chanel Allure Homme Sport</div>
+                <div class="price">1000$ US</div>
+            </div>
+        </div>
+        <div class="view-all">
+            <button class="all-view">VIEW ALL</button>
+        </div>
+    </div>
+
+@*     <div class="section-content-4">
+        <div class="content-4">
+            <p class="description">LOREM IPSUM Lorem Ipsum....</p>
+            <button class="see-all-2">See all</button>
+        </div>
+
+        <div class="images-grid">
+            <img src="image.png" alt="Image 1">
+            <img src="image.png" alt="Image 2">
+            <img src="image.png" alt="Image 3">
+            <img src="image.png" alt="Image 4">
+            <img src="image.png" alt="Image 5">
+            <img src="image.png" alt="Image 6">
+            <img src="image.png" alt="Image 7">
+            <img src="image.png" alt="Image 8">
+            <img src="image.png" alt="Large Image">
+        </div>
+    </div> *@
+
+</div>

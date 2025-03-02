@@ -13,10 +13,15 @@
             <h2>Sign Up</h2>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <form asp-action="Login" asp-controller="Account" class="login-form">
-                <div class="form-group">
-                    <input asp-for="UserName" class="form-control" placeholder="Enter Email*" />
+            <!-- Cập nhật asp-action thành "Create" để thực hiện việc đăng ký -->
+            <form asp-action="Create" asp-controller="Account" class="login-form">
+                <div class="form-group email-group">
+                    <input asp-for="UserName" class="form-control" placeholder="Enter UserName*" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group email-group">
+                    <input asp-for="Email" class="form-control" placeholder="Enter Email*" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group password-group">
                     <input asp-for="Password" class="form-control" placeholder="Enter Password" />
@@ -32,12 +37,12 @@
 </div>
 
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
         <script>
             document.getElementById("close-btn").addEventListener("click", function () {
                 document.getElementById("login-modal").style.display = "none";
             });
         </script>
-	}
+    }
 }

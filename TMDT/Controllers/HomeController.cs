@@ -71,51 +71,51 @@ namespace TMDT.Controllers
 				return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 			}
 		}
-		//public async Task<IActionResult> AddWishList(long Id)
-		//{
-		//	// Get the current user (assume you have a way to retrieve the logged-in user's Id)
-		//	var userId = await _userManager.GetUserAsync(User);  // Modify based on how you get UserId
+		public async Task<IActionResult> AddWishList(long Id)
+		{
+			// Get the current user (assume you have a way to retrieve the logged-in user's Id)
+			var userId = await _userManager.GetUserAsync(User);  // Modify based on how you get UserId
 
-		//	// Check if the product is already in the wishlist for this user
-		//	var existingWishlist = await _datacontext.Wishlists
-		//		.FirstOrDefaultAsync(w => w.ProductId == Id && w.UserId == userId.Id);
+			// Check if the product is already in the wishlist for this user
+			var existingWishlist = await _datacontext.Wishlists
+				.FirstOrDefaultAsync(w => w.ProductId == Id && w.UserId == userId.Id);
 
-		//	if (existingWishlist != null)
-		//	{
-		//		TempData["error"] = "Product is already in your wishlist.";
-		//		return RedirectToAction("Wishlist", "Home");
-		//	}
+			if (existingWishlist != null)
+			{
+				TempData["error"] = "Product is already in your wishlist.";
+				return RedirectToAction("Wishlist", "Home");
+			}
 
-		//	// If not, add the product to the wishlist
-		//	var newWishlist = new WishlistModel
-		//	{
-		//		ProductId = Id,
-		//		UserId = userId.Id
-		//	};
+			// If not, add the product to the wishlist
+			var newWishlist = new WishlistModel
+			{
+				ProductId = Id,
+				UserId = userId.Id
+			};
 
-		//	_datacontext.Wishlists.Add(newWishlist);
-		//	await _datacontext.SaveChangesAsync();
-		//	TempData["success"] = "Product added to wishlist successfully.";
+			_datacontext.Wishlists.Add(newWishlist);
+			await _datacontext.SaveChangesAsync();
+			TempData["success"] = "Product added to wishlist successfully.";
 
-		//	return RedirectToAction("Wishlist", "Home");
-		//}
-		//public async Task<IActionResult> Wishlist()
-		//{
-		//	var wishlist_product = await (from w in _datacontext.Wishlists
-		//								  join p in _datacontext.Products on w.ProductId equals p.Id
-		//								  join u in _datacontext.Users on w.UserId equals u.Id
-		//								  select new { User = u, Product = p, Wishlists = w }).ToListAsync();
+			return RedirectToAction("Wishlist", "Home");
+		}
+		public async Task<IActionResult> Wishlist()
+		{
+			var wishlist_product = await (from w in _datacontext.Wishlists
+										  join p in _datacontext.Products on w.ProductId equals p.Id
+										  join u in _datacontext.AppUsers on w.UserId equals u.Id
+										  select new { User = u, Product = p, Wishlists = w }).ToListAsync();
 
-		//	return View(wishlist_product);
-		//}
-		//public async Task<IActionResult> DeleteWishlist(int Id)
-		//{
-		//	WishlistModel wishlist = await _datacontext.Wishlists.FindAsync(Id);
-		//	_datacontext.Wishlists.Remove(wishlist);
-		//	await _datacontext.SaveChangesAsync();
-		//	TempData["success"] = "Wishlist removed successfully";
-		//	return RedirectToAction("Wishlist", "Home");
-		//}
+			return View(wishlist_product);
+		}
+		public async Task<IActionResult> DeleteWishlist(int Id)
+		{
+			WishlistModel wishlist = await _datacontext.Wishlists.FindAsync(Id);
+			_datacontext.Wishlists.Remove(wishlist);
+			await _datacontext.SaveChangesAsync();
+			TempData["success"] = "Wishlist removed successfully";
+			return RedirectToAction("Wishlist", "Home");
+		}
 		public async Task<IActionResult> Account()
 		{
 			var userId = _userManager.GetUserId(User);

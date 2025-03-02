@@ -19,5 +19,23 @@ namespace TMDT.Repository
 		public DbSet<WishlistModel> Wishlists { get; set; }
 
 		public DbSet<TMDT.Models.UserModel> Users { get; set; }
-	}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Cấu hình kiểu dữ liệu decimal chính xác
+			modelBuilder.Entity<ProductModel>()
+				.Property(p => p.Price)
+				.HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderDetails>()
+                .Property(o => o.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<OrderModel>()
+                .Property(o => o.ShippingCost)
+                .HasColumnType("decimal(18,2)");
+        }
+    }
 }
