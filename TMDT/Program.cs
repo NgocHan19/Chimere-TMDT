@@ -3,10 +3,15 @@ using TMDT.Controllers;
 using TMDT.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-//using Microsoft.OpenApi.Models;
 using TMDT.Repository;
+using TMDT.Models.Momo;
+using TMDT.Service.Momo;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Conect MomoAPI
+builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+builder.Services.AddScoped<IMomoService, MomoService>();
 
 //Connection db
 builder.Services.AddDbContext<DataContext>(options =>

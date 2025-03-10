@@ -31,7 +31,19 @@ namespace TMDT.Areas.Admin.Controllers
             return View(DetailsOrder);
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("PaymentMomoInfo")]
+		public async Task<IActionResult> PaymentMomoInfo(string orderId)
+		{
+			var momoInfo = await _dataContext.MomoInfos.FirstOrDefaultAsync(m => m.OrderId == orderId);
+            if(momoInfo == null)
+			{
+				return NotFound();
+			}
+			return View(momoInfo);
+		}
+
+		[HttpPost]
         public async Task<IActionResult> UpdateOrder(string ordercode, int status)
         {
             var order = await _dataContext.Orders.FirstOrDefaultAsync(o => o.OrderCode == ordercode);
