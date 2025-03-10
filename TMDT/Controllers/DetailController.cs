@@ -6,7 +6,7 @@ namespace TMDT.Controllers
     {
         public IActionResult Detail()
         {
-            return View("~/Views/Product/Search.cshtml");
+            return View("~/Views/Product/Detail.cshtml");
         }
     }
 }

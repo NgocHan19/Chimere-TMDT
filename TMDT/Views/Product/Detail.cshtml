@@ -1,26 +1,63 @@
-﻿@model TMDT.Models.ViewModels.ProductDetailsViewModel
+@* @model List<TMDT.Models.ProductModel> *@
+
 @{
-    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Detail";
 }
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết sản phẩm</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="detail-container">
-        <div class="image-section">
-            <img src="path-to-image.jpg" alt="Sản phẩm" class="main-image">
+
+<link rel="stylesheet" href="~/css/detailpro.css" />
+<script src="~/js/site.js" defer></script>
+
+<div class="detail-container">
+    <div class="image-section">
+        <div class="product-image">
+            <img id="main-image" src="/images/pr1.png" alt="Nước hoa">
         </div>
-        <div class="info-section">
-            <h1 class="product-title">Tên Sản Phẩm</h1>
-            <p class="product-description">Mô tả chi tiết về sản phẩm, tính năng, chất liệu...</p>
-            <p class="product-price">Giá: 2.000.000 VND</p>
-            <button class="buy-button">Mua ngay</button>
+        <div class="thumbnail-container">
+            <button class="prev">
+                <img src="/images/prev.png" alt="Previous">
+            </button>
+            <div class="thumbnails">
+                <img class="thumbnail" src="/images/pr1.png" alt="Miss Dior Thumbnail">
+                <img class="thumbnail" src="/images/pr1.png" alt="Miss Dior Thumbnail">
+                <img class="thumbnail" src="/images/pr1.png" alt="Miss Dior Thumbnail">
+            </div>
+            <button class="next">
+                <img src="/images/next.png" alt="Next">
+            </button>
         </div>
     </div>
-</body>
-</html>
+
+    <div class="product-details">
+        <div class="rating">
+            ⭐⭐⭐⭐☆ <a href="#">See All Reviews (20)</a>
+        </div>
+        <h1 class="product-title">Nước hoa Chanel Bleu De Chanel Parfum</h1>
+        <p class="description">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum is simply dummy text of the printing industry.
+        </p>
+
+        <h3>Select Color</h3>
+
+        <div class="quantity-price">
+            <div class="quantity">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+            </div>
+            <div class="price">
+                <strong>Price Total</strong>
+                <p>1000$ US</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="add-to-bag">ADD TO BAG</button>
+            <button class="save">SAVE</button>
+        </div>
+    </div>
+</div>
+
+
+

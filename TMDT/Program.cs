@@ -16,7 +16,7 @@ builder.Services.AddScoped<IMomoService, MomoService>();
 //Connection db
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectedDb"]);
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
 
 builder.Services.AddAuthorization();
