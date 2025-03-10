@@ -18,32 +18,38 @@ namespace TMDT.Migrations
                 name: "UserModel",
                 newName: "Users");
 
-            migrationBuilder.AddColumn<string>(
-                name: "CamHung",
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Price",
                 table: "Products",
-                type: "nvarchar(max)",
+                type: "decimal(18,2)",
                 nullable: false,
-                defaultValue: "");
+                oldClrType: typeof(decimal),
+                oldType: "decimal(8,2)");
 
             migrationBuilder.AddColumn<int>(
-                name: "DungTich",
+                name: "Capacity",
                 table: "Products",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Component",
+                table: "Products",
+                type: "nvarchar(max)",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Inspiration",
+                table: "Products",
+                type: "nvarchar(max)",
+                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "SubCategoryId",
                 table: "Products",
                 type: "int",
                 nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ThanhPhan",
-                table: "Products",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
 
             migrationBuilder.AddColumn<int>(
                 name: "ParentId",
@@ -134,19 +140,19 @@ namespace TMDT.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "CamHung",
+                name: "Capacity",
                 table: "Products");
 
             migrationBuilder.DropColumn(
-                name: "DungTich",
+                name: "Component",
+                table: "Products");
+
+            migrationBuilder.DropColumn(
+                name: "Inspiration",
                 table: "Products");
 
             migrationBuilder.DropColumn(
                 name: "SubCategoryId",
-                table: "Products");
-
-            migrationBuilder.DropColumn(
-                name: "ThanhPhan",
                 table: "Products");
 
             migrationBuilder.DropColumn(
@@ -160,6 +166,14 @@ namespace TMDT.Migrations
             migrationBuilder.RenameTable(
                 name: "Users",
                 newName: "UserModel");
+
+            migrationBuilder.AlterColumn<decimal>(
+                name: "Price",
+                table: "Products",
+                type: "decimal(8,2)",
+                nullable: false,
+                oldClrType: typeof(decimal),
+                oldType: "decimal(18,2)");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UserName",

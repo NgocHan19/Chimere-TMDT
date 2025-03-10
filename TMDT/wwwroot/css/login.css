@@ -1,6 +1,6 @@
 ﻿/* Lớp phủ làm mờ nền */
 .modal-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -23,23 +23,14 @@
     z-index: 1000;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.login-container {
+/*.login-container {
     position: relative;
     background: #fdf3e5;
     padding: 30px;
     width: 400px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+}*/
 
     .login-container h2 {
         font-size: 26px;
