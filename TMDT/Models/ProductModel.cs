@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TMDT.Areas.Admin.Repository.Validation;
 
 namespace TMDT.Models
 {
@@ -29,7 +30,11 @@ namespace TMDT.Models
         public int Capacity { get; set; }
         public RatingModel Ratings { get; set; }
 
-        public int CategoryId { get; set; }
+		[NotMapped]
+		[FileExtension]
+		public IFormFile? ImageUpload { get; set; }
+
+		public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public CategoryModel Category { get; set; }
 

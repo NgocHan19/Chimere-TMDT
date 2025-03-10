@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TMDT.Models.ViewModel
+namespace TMDT.Models.ViewModels
 {
 	public class ProductDetailsViewModel
 	{
