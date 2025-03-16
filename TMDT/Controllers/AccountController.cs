@@ -45,6 +45,60 @@ namespace TMDT.Controllers
 			return View(loginVM);
 		}
 
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		public async Task<IActionResult> SendEmailForgotPassword(AppUserModel user)
+		{
+			var checkMail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+
+			if (checkMail == null)
+			{
+				TempData["error"] = "Email not found.";
+				return RedirectToAction("ForgotPassword", "Account");
+			}
+			else
+			{
+				string token = Guid.NewGuid().ToString();
+				// Update token for user
+				checkMail.Token = token;
+				_dataContext.Update(checkMail);
+				await _dataContext.SaveChangesAsync();
+
+				// Send reset email
+				var receiver = checkMail.Email;
+				var subject = "Change password for user " + checkMail.Email;
+				var message = $"Click on this link to change your password: <a href='{Request.Scheme}://{Request.Host}/Account/NewPassword?email={checkMail.Email}&token={token}'>Change Password</a>";
+
+				await _emailSender.SendEmailAsync(receiver, subject, message);
+			}
+
+			TempData["success"] = "An email has been sent to your registered email address with password reset instructions.";
+			return RedirectToAction("ForgotPassword", "Account");
+		}
+
+		public async Task<IActionResult> NewPassword(AppUserModel user, string token)
+		{
+			var checkUser = await _userManager.Users
+				.Where(u => u.Email == user.Email)
+				.Where(u => u.Token == user.Token)
+				.FirstOrDefaultAsync();
+
+			if (checkUser != null)
+			{
+				ViewBag.Email = checkUser.Email;
+				ViewBag.Token = token;
+			}
+			else
+			{
+				TempData["error"] = "Email not found or token is incorrect.";
+				return RedirectToAction("ForgotPassword", "Account");
+			}
+			return View();
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> UpdateNewPassword(AppUserModel user)
 		{
@@ -86,60 +140,6 @@ namespace TMDT.Controllers
 			}
 		}
 
-		public async Task<IActionResult> NewPassword(AppUserModel user, string token)
-		{
-			var checkUser = await _userManager.Users
-				.Where(u => u.Email == user.Email)
-				.Where(u => u.Token == user.Token)
-				.FirstOrDefaultAsync();
-
-			if (checkUser != null)
-			{
-				ViewBag.Email = checkUser.Email;
-				ViewBag.Token = token;
-			}
-			else
-			{
-				TempData["error"] = "Email not found or token is incorrect.";
-				return RedirectToAction("ForgotPassword", "Account");
-			}
-			return View();
-		}
-
-		public async Task<IActionResult> SendEmailForgotPassword(AppUserModel user)
-		{
-			var checkMail = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
-
-			if (checkMail == null)
-			{
-				TempData["error"] = "Email not found.";
-				return RedirectToAction("ForgotPassword", "Account");
-			}
-			else
-			{
-				string token = Guid.NewGuid().ToString();
-				// Update token for user
-				checkMail.Token = token;
-				_dataContext.Update(checkMail);
-				await _dataContext.SaveChangesAsync();
-
-				// Send reset email
-				var receiver = checkMail.Email;
-				var subject = "Change password for user " + checkMail.Email;
-				var message = $"Click on this link to change your password: <a href='{Request.Scheme}://{Request.Host}/Account/NewPassword?email={checkMail.Email}&token={token}'>Change Password</a>";
-
-				await _emailSender.SendEmailAsync(receiver, subject, message);
-			}
-
-			TempData["success"] = "An email has been sent to your registered email address with password reset instructions.";
-			return RedirectToAction("ForgotPassword", "Account");
-		}
-
-		public IActionResult ForgotPassword()
-		{
-			return View();
-		}
-
 		public IActionResult Create()
 		{
 			return View();
@@ -148,45 +148,57 @@ namespace TMDT.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserModel user)
         {
-            if (ModelState.IsValid)
-            {
-                AppUserModel newUser = new AppUserModel
-                {
-                    UserName = user.UserName,
-                    Email = user.Email
-                };
+            if(ModelState.IsValid)
+			{
+				//Kiểm tra xem email đã tồn tại chưa
+				var checkEmail = await _userManager.FindByEmailAsync(user.Email);
+				if(checkEmail != null)
+				{
+					ModelState.AddModelError("Email", "Email already exists.");
+					return View(user);
+				}
 
-                IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
-
-                if (result.Succeeded)
-                {
-                    // Assign the default role "User" to the newly created account
-                    var addToRoleResult = await _userManager.AddToRoleAsync(newUser, "User");
-
-                    if (addToRoleResult.Succeeded)
-                    {
-                        TempData["success"] = "Account created successfully";
-                        return RedirectToAction("Login", "Account");
-                    }
-                    else
-                    {
-                        // Handle any errors that occurred while adding the user to the role
-                        foreach (IdentityError error in addToRoleResult.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
-                    }
-                }
-                else
-                {
-                    // Handle errors during account creation
-                    foreach (IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-            }
-            return View(user);
+				//Kiểm tra xem sđt đã tồn tại chưa
+				var checkPhoneNumber = await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == user.PhoneNumber);
+				if (checkPhoneNumber != null)
+				{
+					ModelState.AddModelError("PhoneNumber", "Phone number already exists.");
+					return View(user);
+				}
+				
+				//Tạo user mới
+				AppUserModel newUser = new AppUserModel
+				{
+					UserName = user.UserName,
+					Email = user.Email,
+					PhoneNumber = user.PhoneNumber
+				};
+				IdentityResult result = await _userManager.CreateAsync(newUser, user.Password);
+				if (result.Succeeded)
+				{
+					var addRole = await _userManager.AddToRoleAsync(newUser, "User");
+					if(addRole.Succeeded)
+					{
+						TempData["success"] = "Account created successfully!";
+						return RedirectToAction("Login", "Account");
+					}
+					else
+					{
+						foreach (IdentityError error in addRole.Errors)
+						{
+							ModelState.AddModelError("", error.Description);
+						}
+					}
+				}
+				else
+				{
+					foreach (IdentityError error in result.Errors)
+					{
+						ModelState.AddModelError("", error.Description);
+					}
+				}
+			}
+			return View(user);
         }
 
         public async Task<IActionResult> Logout(string returnUrl = "/")
