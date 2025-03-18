@@ -43,6 +43,18 @@ namespace TMDT.Areas.Admin.Controllers
 			return View(momoInfo);
 		}
 
+		[HttpGet]
+		[Route("PaymentVNPayInfo")]
+		public async Task<IActionResult> PaymentVNPayInfo(string orderId)
+		{
+			var vnpayInfo = await _dataContext.VNPayInfos.FirstOrDefaultAsync(m => m.PaymentId == orderId);
+			if (vnpayInfo == null)
+			{
+				return NotFound();
+			}
+			return View(vnpayInfo);
+		}
+
 		[HttpPost]
         public async Task<IActionResult> UpdateOrder(string ordercode, int status)
         {

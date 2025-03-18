@@ -21,6 +21,7 @@ namespace TMDT.Repository
 		public DbSet<ProductQuantityModel> ProductQuantities { get; set; }
 		public DbSet<ShippingModel> Shippings { get; set; }
 		public DbSet<MomoInfoModel> MomoInfos { get; set; }
+		public DbSet<VNPayInfoModel> VNPayInfos { get; set; }
 
 		public DbSet<TMDT.Models.UserModel> UserModel { get; set; }
 	}
