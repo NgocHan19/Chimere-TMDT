@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using TMDT.Repository;
 using TMDT.Models.Momo;
 using TMDT.Service.Momo;
+using TMDT.Service.VNPay;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Conect MomoAPI
 builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
 builder.Services.AddScoped<IMomoService, MomoService>();
+
+//Connect VNPayAPI
+builder.Services.AddScoped<IVNPayService, VNPayService>();
 
 //Connection db
 builder.Services.AddDbContext<DataContext>(options =>

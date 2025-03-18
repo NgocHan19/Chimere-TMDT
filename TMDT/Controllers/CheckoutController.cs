@@ -8,6 +8,7 @@ using TMDT.Repository;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using TMDT.Service.VNPay;
 
 namespace TMDT.Controllers
 {
@@ -17,12 +18,14 @@ namespace TMDT.Controllers
 		public readonly IEmailSender _emailSender;
 		private static readonly HttpClient client = new HttpClient();
 		private IMomoService _momoService;
-		
-		public CheckoutController(IEmailSender emailSender, DataContext dataContext, IMomoService momoService)
+		private readonly IVNPayService _vnPayService;
+
+		public CheckoutController(IEmailSender emailSender, DataContext dataContext, IMomoService momoService, IVNPayService vnPayService)
 		{
 			_dataContext = dataContext;
 			_emailSender = emailSender;
 			_momoService = momoService;
+			_vnPayService = vnPayService;
 		}
 
 		public IActionResult Index()
@@ -98,7 +101,7 @@ namespace TMDT.Controllers
 
 
 		[HttpGet]
-        public async Task<IActionResult> PaymentCallBack(MomoInfoModel model)
+        public async Task<IActionResult> PaymentCallBackMomo(MomoInfoModel model)
 		{
 			var response = _momoService.PaymentExecuteAsync(HttpContext.Request.Query);
             var requestQuery = HttpContext.Request.Query;
@@ -122,6 +125,13 @@ namespace TMDT.Controllers
 				return RedirectToAction("Index", "Cart");
 			}
 			return View(response);
+		}
+
+		[HttpGet]
+		public IActionResult PaymentCallbackVNpay()
+		{
+			var response = _vnPayService.PaymentExecute(Request.Query);
+			return Json(response);
 		}
 	}
 }
