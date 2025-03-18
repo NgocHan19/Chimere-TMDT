@@ -35,7 +35,7 @@ namespace TMDT.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(loginVM.Email, loginVM.Password, false, false);
+				Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(loginVM.UserName, loginVM.Password, false, false);
 				if (result.Succeeded)
 				{
 					return Redirect(loginVM.ReturnUrl ?? "/");
@@ -177,7 +177,7 @@ namespace TMDT.Controllers
 				if (result.Succeeded)
 				{
 					var addRole = await _userManager.AddToRoleAsync(newUser, "User");
-					if(addRole.Succeeded)
+					if (addRole.Succeeded)
 					{
 						TempData["success"] = "Account created successfully!";
 						return RedirectToAction("Login", "Account");
@@ -222,7 +222,7 @@ namespace TMDT.Controllers
             {
                 return NotFound("User not found.");
             }
-            // Step 6: Return the view with the model
+            // Step 4: Return the view with the model
             return View(currentUser);
         }
 

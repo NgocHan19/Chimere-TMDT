@@ -9,7 +9,7 @@ namespace TMDT.Models
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please Type Your Email"), EmailAddress]
         public string Email { get; set; }
-        [DataType(DataType.Password),Required(ErrorMessage = "Please Type Your Password")]
+        [DataType(DataType.Password), Required(ErrorMessage = "Please Type Your Password")]
         public string Password { get; set; }
         [Required]
         public string PhoneNumber { get; set; }

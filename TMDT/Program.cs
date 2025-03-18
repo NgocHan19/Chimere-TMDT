@@ -46,8 +46,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 	options.Password.RequiredLength = 4;
 	options.Password.RequiredUniqueChars = 1;
 
-	/*    // Lockout settings.
-		options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+	// Lockout settings.
+	/*	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 		options.Lockout.MaxFailedAccessAttempts = 5;
 		options.Lockout.AllowedForNewUsers = true;*/
 

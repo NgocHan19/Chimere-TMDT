@@ -1,10 +1,10 @@
+using TMDT.Models;
+using TMDT.Models.ViewModels;
+using TMDT.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using TMDT.Models;
-using TMDT.Models.ViewModels;
-using TMDT.Repository;
 
 namespace TMDT.Controllers
 {
@@ -53,6 +53,7 @@ namespace TMDT.Controllers
 		{
 			return View();
 		}
+
 		public async Task<IActionResult> Contact()
 		{
 			var contact = await _datacontext.Contacts.FirstAsync();
@@ -103,7 +104,7 @@ namespace TMDT.Controllers
 		{
 			var wishlist_product = await (from w in _datacontext.Wishlists
 										  join p in _datacontext.Products on w.ProductId equals p.Id
-										  join u in _datacontext.AppUsers on w.UserId equals u.Id
+										  join u in _datacontext.Users on w.UserId equals u.Id
 										  select new { User = u, Product = p, Wishlists = w }).ToListAsync();
 
 			return View(wishlist_product);
