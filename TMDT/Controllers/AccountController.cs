@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication;
 
 namespace TMDT.Controllers
 {
@@ -207,7 +210,71 @@ namespace TMDT.Controllers
 			return Redirect(returnUrl);
 		}
 
-        public async Task<IActionResult> Portal()
+		public async Task LoginGoogle()
+		{
+			await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties
+			{
+				RedirectUri = Url.Action("GoogleResponse")
+			});
+		}
+
+		public async Task<IActionResult> GoogleResponse()
+		{
+			var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+			if (!result.Succeeded)
+			{
+				//Nếu xác thực thất bại, chuyển hướng về trang Login
+				return RedirectToAction("Login");
+			}
+			var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
+			{
+				claim.Issuer,
+				claim.OriginalIssuer,
+				claim.Type,
+				claim.Value
+			});
+			var email = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+			string emailName = email.Split('@')[0];
+
+			//Kiểm tra xem user đã tồn tại chưa
+			var existingUser = await _userManager.FindByEmailAsync(email);
+			if (existingUser == null)
+			{
+				//Nếu user chưa tồn tại, tạo mới
+				var passwordHasher = new PasswordHasher<AppUserModel>();
+				var hashedPassword = passwordHasher.HashPassword(null, "123456789");
+				//Tạo user mới
+				var newUser = new AppUserModel
+				{
+					UserName = emailName,
+					Email = email
+				};
+				newUser.PasswordHash = hashedPassword;
+				var createUserResult = await _userManager.CreateAsync(newUser);
+				if (!createUserResult.Succeeded)
+				{
+					TempData["error"] = "An error occurred while creating the user.";
+					//Nếu có lỗi, chuyển hướng về trang Login
+					return RedirectToAction("Login", "Account");
+				}
+				else
+				{
+					//Nếu tạo user mới thành công, đăng nhập và chuyển hướng về trang chủ
+					await _signInManager.SignInAsync(newUser, isPersistent: false);
+					TempData["success"] = "Login successfully!";
+					return RedirectToAction("Index", "Home");
+				}
+			}
+			else
+			{
+				//Nếu user đã tồn tại thì đăng nhập và chuyển hướng về trang chủ
+				await _signInManager.SignInAsync(existingUser, isPersistent: false);
+				TempData["success"] = "Login successfully!";
+			}
+			return RedirectToAction("Login", "Account");
+		}
+
+		public async Task<IActionResult> Portal()
         {
             // Step 1: Get the current user's email
             var email = User.FindFirstValue(ClaimTypes.Email);
