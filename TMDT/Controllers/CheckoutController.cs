@@ -8,6 +8,7 @@ using TMDT.Repository;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using TMDT.Service.VNPay;
 
 namespace TMDT.Controllers
 {
@@ -17,12 +18,14 @@ namespace TMDT.Controllers
 		public readonly IEmailSender _emailSender;
 		private static readonly HttpClient client = new HttpClient();
 		private IMomoService _momoService;
-		
-		public CheckoutController(IEmailSender emailSender, DataContext dataContext, IMomoService momoService)
+		private readonly IVNPayService _vnPayService;
+
+		public CheckoutController(IEmailSender emailSender, DataContext dataContext, IMomoService momoService, IVNPayService vnPayService)
 		{
 			_dataContext = dataContext;
 			_emailSender = emailSender;
 			_momoService = momoService;
+			_vnPayService = vnPayService;
 		}
 
 		public IActionResult Index()
@@ -30,7 +33,7 @@ namespace TMDT.Controllers
             return View();
         }
 
-		public async Task<IActionResult> Checkout(string OrderId)
+		public async Task<IActionResult> Checkout(string PaymentMethod, string PaymentId)
 		{
 			var userEmail = User.FindFirstValue(ClaimTypes.Email);
 			if(userEmail == null)
@@ -54,13 +57,18 @@ namespace TMDT.Controllers
 				}
 				orderItem.ShippingCost = shippingPrice;
 				orderItem.UserName = userEmail;
-				if(OrderId != null)
+				orderItem.PaymentMethod = PaymentMethod + " " + PaymentId;
+				if (PaymentMethod != "VNPay" || PaymentMethod != "Momo")
 				{
-					orderItem.PaymentMethod = OrderId;
+					orderItem.PaymentMethod = "COD";
+				}
+				else if (PaymentMethod == "VNPay")
+				{
+					orderItem.PaymentMethod = "VNPay" + " " + PaymentId;
 				}
 				else
 				{
-					orderItem.PaymentMethod = "COD";
+					orderItem.PaymentMethod = "Momo" + " " + PaymentMethod;
 				}
 				orderItem.Status = 1;
 				orderItem.CreatedDate = DateTime.Now;
@@ -98,11 +106,11 @@ namespace TMDT.Controllers
 
 
 		[HttpGet]
-        public async Task<IActionResult> PaymentCallBack(MomoInfoModel model)
+        public async Task<IActionResult> PaymentCallBackMomo(MomoInfoModel model)
 		{
 			var response = _momoService.PaymentExecuteAsync(HttpContext.Request.Query);
             var requestQuery = HttpContext.Request.Query;
-            if(requestQuery["errorCode"] != "0")
+            if(requestQuery["resultCode"] != "0")
 			{
 				var newMomoInsert = new MomoInfoModel
 				{
@@ -114,13 +122,45 @@ namespace TMDT.Controllers
 				};
 				_dataContext.Add(newMomoInsert);
 				await _dataContext.SaveChangesAsync();
-				var checkout = requestQuery["orderId"];
+				var PaymentMethod = "Momo";
+				await Checkout(requestQuery["orderId"], PaymentMethod );
 			}
 			else
 			{
 				TempData["success"] = "Đã hủy giao dịch";
 				return RedirectToAction("Index", "Cart");
 			}
+			return View(response);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> PaymentCallbackVNpay()
+		{
+			var response = _vnPayService.PaymentExecute(Request.Query);
+			if (response.VNPayResponseCode == "00")
+			{
+				var newVNPayInsert = new VNPayInfoModel
+				{
+					OrderId = response.VNPayResponseCode,
+					PaymentMethod = response.VNPayResponseCode,
+					OrderDescription = response.VNPayResponseCode,
+					TransactionId = response.VNPayResponseCode,
+					PaymentId = response.VNPayResponseCode,
+					DateCreate = DateTime.Now
+				};
+				_dataContext.Add(newVNPayInsert);
+				await _dataContext.SaveChangesAsync();
+				//Tiiến hành đặt hàng khi thanh toán VNPay thành công
+				var paymentMethod = response.PaymentMethod;
+				var paymentId = response.PaymentId;
+				await Checkout(paymentMethod, paymentId);
+			}
+			else
+			{
+				TempData["success"] = "Đã hủy giao dịch";
+				return RedirectToAction("Index", "Cart");
+			}
+			//return Json(response);
 			return View(response);
 		}
 	}

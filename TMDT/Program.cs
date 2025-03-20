@@ -6,12 +6,16 @@ using Microsoft.EntityFrameworkCore;
 using TMDT.Repository;
 using TMDT.Models.Momo;
 using TMDT.Service.Momo;
+using TMDT.Service.VNPay;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Conect MomoAPI
 builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
 builder.Services.AddScoped<IMomoService, MomoService>();
+
+//Connect VNPayAPI
+builder.Services.AddScoped<IVNPayService, VNPayService>();
 
 //Connection db
 builder.Services.AddDbContext<DataContext>(options =>
@@ -46,8 +50,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 	options.Password.RequiredLength = 4;
 	options.Password.RequiredUniqueChars = 1;
 
-	/*    // Lockout settings.
-		options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+	// Lockout settings.
+	/*	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
 		options.Lockout.MaxFailedAccessAttempts = 5;
 		options.Lockout.AllowedForNewUsers = true;*/
 
@@ -82,7 +86,7 @@ app.UseAuthentication();
 app.MapControllerRoute(
 
 	name: "default",
-	pattern: "{controller=Detail}/{action=Detail}/{id?}");
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 app.Run();

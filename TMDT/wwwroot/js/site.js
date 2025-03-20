@@ -1,4 +1,7 @@
-﻿var swiper = new Swiper(".swiper", {
+﻿import Swiper from 'swiper';
+import 'sưiper/css';
+
+var swiper = new Swiper(".swiper", {
     loop: true,
     navigation: {
         nextEl: ".swiper-button-next",

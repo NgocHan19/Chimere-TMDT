@@ -25,14 +25,14 @@ namespace TMDT.Areas.Admin.Controllers
         public async Task<IActionResult> Index(int pg = 1)
         {
             // Step 1: Retrieve users and their roles
-            var usersWithRoles = await (from u in _dataContext.AppUsers
+            var usersWithRoles = await (from u in _dataContext.Users
                                         join ur in _dataContext.UserRoles on u.Id equals ur.UserId
 
                                         join r in _dataContext.Roles on ur.RoleId equals r.Id
                                         select new { User = u, RoleName = r.Name }).ToListAsync();
 
             // Step 2: Retrieve categories and paginate them
-            List<AppUserModel> user = _dataContext.AppUsers.ToList(); // Assume 33 datas
+            List<AppUserModel> user = _dataContext.Users.ToList(); // Assume 33 datas
 
             const int pageSize = 10; // Items per page
             if (pg < 1)
@@ -70,60 +70,60 @@ namespace TMDT.Areas.Admin.Controllers
 			return View(new AppUserModel());
 		}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AppUserModel user)
-        {
-            if (ModelState.IsValid)
-            {
-                var createUserResult = await _userManager.CreateAsync(user,user.PasswordHash);
-                if(createUserResult.Succeeded)
-                {
-                    var createUser = await _userManager.FindByEmailAsync(user.Email);
-                    var userId = createUser.Id;
-                    var role = _roleManager.FindByIdAsync(user.RoleId);
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create(AppUserModel user)
+		{
+			if (ModelState.IsValid)
+			{
+				var createUserResult = await _userManager.CreateAsync(user, user.PasswordHash);
+				if (createUserResult.Succeeded)
+				{
+					var createUser = await _userManager.FindByEmailAsync(user.Email);
+					var userId = createUser.Id;
+					var role = _roleManager.FindByIdAsync(user.RoleId);
 
-                    var addToRoleResult = await _userManager.AddToRoleAsync(createUser, role.Result.Name);
-                    if (!addToRoleResult.Succeeded)
-                    {
-                        AddIdentityErrors(addToRoleResult);
-                    }
-                    return RedirectToAction("Index", "User");
-                }
-                else
-                {
-                    AddIdentityErrors(createUserResult);
-                    return View(user);
-                }
-            }
-            else
-            {
-                TempData["error"] = "Model error";
-                List<string> errors = new List<string>();
-                foreach (var value in ModelState.Values)
-                {
-                    foreach (var error in value.Errors)
-                    {
-                        errors.Add(error.ErrorMessage);
-                    }
-                }
-                string errorMessage = string.Join("\n", errors);
-                return BadRequest(errorMessage);
-            }
-            var roles = await _roleManager.Roles.ToListAsync();
-            ViewBag.Roles = new SelectList(roles, "Id", "Name");
-            return View(user);
-        }
+					var addToRoleResult = await _userManager.AddToRoleAsync(createUser, role.Result.Name);
+					if (!addToRoleResult.Succeeded)
+					{
+						AddIdentityErrors(addToRoleResult);
+					}
+					return RedirectToAction("Index", "User");
+				}
+				else
+				{
+					AddIdentityErrors(createUserResult);
+					return View(user);
+				}
+			}
+			else
+			{
+				TempData["error"] = "Model error";
+				List<string> errors = new List<string>();
+				foreach (var value in ModelState.Values)
+				{
+					foreach (var error in value.Errors)
+					{
+						errors.Add(error.ErrorMessage);
+					}
+				}
+				string errorMessage = string.Join("\n", errors);
+				return BadRequest(errorMessage);
+			}
+			var roles = await _roleManager.Roles.ToListAsync();
+			ViewBag.Roles = new SelectList(roles, "Id", "Name");
+			return View(user);
+		}
 
-        private void AddIdentityErrors(IdentityResult identityResult)
-        {
-            foreach(var error in identityResult.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
+		private void AddIdentityErrors(IdentityResult identityResult)
+		{
+			foreach (var error in identityResult.Errors)
+			{
+				ModelState.AddModelError(string.Empty, error.Description);
+			}
+		}
 
-        [HttpGet]
+		[HttpGet]
         public async Task<IActionResult> Delete(string Id)
         {
             if(string.IsNullOrEmpty(Id))
